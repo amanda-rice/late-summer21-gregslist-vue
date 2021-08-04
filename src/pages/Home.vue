@@ -11,6 +11,16 @@
         <CarCard :car="c"/>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <HouseForm />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4" v-for="h in houses" :key="h.id">
+        <HouseCard :house="h"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,6 +30,9 @@ import {AppState} from '../AppState.js'
 import {carsService } from '../services/CarsService'
 import CarCard from '../components/CarCard.vue'
 import CarForm from '../components/CarForm.vue'
+import HouseCard from '../components/HouseCard.vue'
+import HouseForm from '../components/HouseForm.vue'
+import {homesService} from '../services/HomesService'
 
 export default {
   name: 'Home',
@@ -34,16 +47,26 @@ export default {
         console.error(error)
       }
     })
+    onMounted(async ()=>{
+      try {
+        await homesService.getHouses()
+      } catch (error) {
+        console.error(error)
+      }
+    })
     return {
       // state,
       // computeds
-      cars: computed(() => AppState.cars)
+      cars: computed(() => AppState.cars),
+      houses: computed(()=> AppState.houses)
       // methods
     }
   },
   components: {
     CarCard,
-    CarForm
+    CarForm,
+    HouseCard,
+    HouseForm
   }
 }
 </script>
