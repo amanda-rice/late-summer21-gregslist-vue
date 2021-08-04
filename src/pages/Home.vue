@@ -13,6 +13,16 @@
     </div>
     <div class="row">
       <div class="col">
+        <JobForm />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4" v-for="j in jobs" :key="j.id">
+        <JobCard :job="j"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
         <HouseForm />
       </div>
     </div>
@@ -33,6 +43,9 @@ import CarForm from '../components/CarForm.vue'
 import HouseCard from '../components/HouseCard.vue'
 import HouseForm from '../components/HouseForm.vue'
 import {homesService} from '../services/HomesService'
+import JobCard from '../components/JobCard.vue'
+import JobForm from '../components/JobForm.vue'
+import {jobsService} from '../services/JobsService'
 
 export default {
   name: 'Home',
@@ -49,6 +62,13 @@ export default {
     })
     onMounted(async ()=>{
       try {
+        await jobsService.getJobs()
+      } catch (error) {
+        console.error(error)
+      }
+    })
+    onMounted(async ()=>{
+      try {
         await homesService.getHouses()
       } catch (error) {
         console.error(error)
@@ -58,7 +78,8 @@ export default {
       // state,
       // computeds
       cars: computed(() => AppState.cars),
-      houses: computed(()=> AppState.houses)
+      houses: computed(()=> AppState.houses),
+      jobs: computed(()=> AppState.jobs)
       // methods
     }
   },
@@ -66,7 +87,9 @@ export default {
     CarCard,
     CarForm,
     HouseCard,
-    HouseForm
+    HouseForm,
+    JobCard,
+    JobForm
   }
 }
 </script>

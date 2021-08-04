@@ -36,7 +36,7 @@
   <footer class="container-fluid bg-primary">
     <div class="row">
       <div class="col text-center p-3 text-light">
-        <p>Made with <img class="logo" src="./assets/logo.png" /> by Codeworks</p>
+        <p>Made with <img class="logo" src="./assets/logo.png" /> by Amanda Rice</p>
       </div>
     </div>
   </footer>

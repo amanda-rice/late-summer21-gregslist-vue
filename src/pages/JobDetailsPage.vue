@@ -1,12 +1,14 @@
 <template>
-  <div class="house-details-page row align-items-center justify-content-center">
+  <div class="job-details-page row align-items-center justify-content-center">
     <div class="col-10 align-self-center text-center">
-        <h1>Welcome to the house details</h1>
-        <img :src="house.imgUrl" :alt="house.description">
-        <p>{{house.bedrooms}} bedrooms/{{house.bathrooms}} baths</p>
-        <p>
-          {{house.description}}
-        </p>
+        <h1>Welcome to the job details</h1>
+        <div class="text-center">
+          <p class="m-0"><b>{{job.title}}</b></p>
+          <p class="m-0">{{job.rate}} per hour</p>
+          <p class="m-0">{{job.hours}} hours per week</p>
+          <p class="m-0">{{job.description}}</p>
+          <p class="m-0">${{job.company}}</p>
+        </div>
         <button class="btn btn-danger" @click="destroy">Delete</button>
     </div>
   </div>
@@ -16,25 +18,25 @@
 <script>
   import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { homesService } from '../services/HomesService'
+import { jobsService } from '../services/JobsService'
 import {useRoute, useRouter} from 'vue-router'
 export default {
-  name: 'house-details-page',
+  name: 'job-details-page',
   setup(){
     const route = useRoute()
     const router = useRouter()
     onMounted(async()=>{
       try {
-        await homesService.getHouseById(route.params.id)
+        await jobsService.getJobById(route.params.id)
       } catch (error) {
         console.error(error)
       }
     })
     return {
-      house: computed(()=>AppState.activeHouse),
+      job: computed(()=>AppState.activeJob),
       async destroy(){
         try {
-          await homesService.destroy(route.params.id)
+          await jobsService.destroy(route.params.id)
           router.push({name: 'Home'})
         } catch (error) {
           console.error(error)
