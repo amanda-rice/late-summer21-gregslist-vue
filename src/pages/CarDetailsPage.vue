@@ -5,6 +5,7 @@
     <br>
     {{car.description}}
 
+    <button class="btn btn-warning" @click="bid">Bid</button>
     <button class="btn btn-danger" @click="destroy">Delete</button>
   </div>
 </template>
@@ -34,6 +35,17 @@ export default {
           await carsService.destroy(route.params.id)
           //  navigate user back to home
           router.push({name: 'Home'})
+        } catch (error) {
+          console.error(error)
+        }
+      },
+      async bid(){
+        try {
+          console.log(this.car.id)
+          this.car.price += 100 
+          await carsService.bid(this.car)
+          //  navigate user back to home
+          // router.push({name: 'Home'})
         } catch (error) {
           console.error(error)
         }

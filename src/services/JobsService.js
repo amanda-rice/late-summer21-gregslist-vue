@@ -18,6 +18,7 @@ class JobsService{
     AppState.jobs.push(res.data)
     return res.data.id
   }
+
   async destroy(id) {
     await sandbox.delete(`/jobs/${id}`)
     AppState.jobs = AppState.jobs.filter(job => job.id !==id)

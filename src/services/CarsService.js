@@ -15,6 +15,10 @@ class CarsService {
     AppState.cars.push(res.data)
     return res.data.id
   }
+  async bid(car) {
+      console.log(car.id)
+    await sandbox.put(`/cars/${car.id}`, car)
+  }
   async destroy(id){
     await sandbox.delete(`/cars/${id}`)
     AppState.cars = AppState.cars.filter(car => car.id !== id)

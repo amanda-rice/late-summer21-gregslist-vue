@@ -15,16 +15,20 @@
       </button>
       <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <router-link class="nav-link" :to="{name: 'Home'}"
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{name: 'CarsHome'}"
               >Cars <span class="sr-only">(current)</span></router-link
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Jobs</a>
+            <router-link class="nav-link" :to="{name: 'HousesHome'}"
+              >Houses <span class="sr-only"></span></router-link
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Houses</a>
+            <router-link class="nav-link" :to="{name: 'JobsHome'}"
+              >Jobs <span class="sr-only"></span></router-link
+            >
           </li>
         </ul>
       </div>
